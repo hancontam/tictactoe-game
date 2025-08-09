@@ -1,5 +1,5 @@
 .game-board {
-  margin: 25px;
+  margin: 25px auto;
   width: 500px;
   height: 500px;
   display: grid;
@@ -27,13 +27,14 @@
 }
 
 .game-reset {
-  margin: 25px;
-  display: inline-block;
+  margin: 25px auto;
+  display: block;
   padding: 10px 20px;
   color: white;
   background-color: #6a5af9;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 .game-winner {
