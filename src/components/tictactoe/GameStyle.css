@@ -1,11 +1,42 @@
+/* Import modern fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+/* Game container */
+.game-container {
+  font-family: "Poppins", sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
 .game-board {
-  margin: 25px auto;
-  width: 500px;
-  height: 500px;
+  margin: 30px auto;
+  width: 450px;
+  height: 450px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-gap: 25px;
+  grid-gap: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .game-cell {
@@ -13,32 +44,159 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 100px;
-  font-weight: bold;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  font-size: 4rem;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-cell:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.game-cell:active {
+  transform: translateY(-2px);
 }
 
 .game-cell.is-x {
-  color: #2cccff;
+  color: #4fc3f7;
+  text-shadow: 2px 2px 4px rgba(79, 195, 247, 0.3);
 }
 
 .game-cell.is-o {
-  color: #ff6651;
+  color: #ff7043;
+  text-shadow: 2px 2px 4px rgba(255, 112, 67, 0.3);
+}
+
+.game-cell.winning-cell {
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  animation: pulse 1s infinite;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  color: #333;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .game-reset {
-  margin: 25px auto;
+  margin: 30px auto;
   display: block;
-  padding: 10px 20px;
+  padding: 15px 40px;
   color: white;
-  background-color: #6a5af9;
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
   border: none;
-  outline: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.game-winner {
-  padding: 25px;
-  font-size: 20px;
-  color: #f62682;
+.game-reset:hover {
+  background: linear-gradient(45deg, #ff5252, #ff7979);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+}
+
+.game-reset:active {
+  transform: translateY(-1px);
+}
+
+.game-status {
+  padding: 20px 30px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.game-status.next-turn {
+  color: #333;
+}
+
+.game-status.winner {
+  background: linear-gradient(45deg, #4caf50, #8bc34a);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: celebration 2s ease-in-out;
+  box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+  font-size: 2.2rem;
+}
+
+.game-status.draw {
+  background: linear-gradient(45deg, #ff9800, #ffc107);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: celebration 2s ease-in-out;
+  box-shadow: 0 15px 30px rgba(255, 152, 0, 0.4);
+}
+
+@keyframes celebration {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.05) rotate(-2deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(2deg);
+  }
+}
+
+.celebration-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffd700;
+  border-radius: 50%;
+  animation: explode 2s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) translate(var(--x), var(--y));
+  }
 }

@@ -1,21 +1,34 @@
 import React from "react";
 import Cell from "./Cell";
-// import calculateWinner from "../../helper";
 
 export default function Board(props) {
-  // console.log(props);
-  // const cells = [null, null, null, "X", "X", "X", null, null, null];
-  // console.log(calculateWinner(cells));
+  const { cells, onClick, winningLine = [] } = props;
+
   return (
     <div className="game-board">
-      {props.cells.map((item, index) => (
-        <Cell
-          key={index}
-          value={item}
-          onClick={() => props.onClick(index)}
-          className={item === "X" ? "is-x" : item === "O" ? "is-o" : ""}
-        ></Cell>
-      ))}
+      {cells.map((item, index) => {
+        const isWinningCell = winningLine.includes(index);
+        let className = "";
+
+        if (item === "X") {
+          className = "is-x";
+        } else if (item === "O") {
+          className = "is-o";
+        }
+
+        if (isWinningCell) {
+          className += " winning-cell";
+        }
+
+        return (
+          <Cell
+            key={index}
+            value={item}
+            onClick={() => onClick(index)}
+            className={className}
+          />
+        );
+      })}
     </div>
   );
 }

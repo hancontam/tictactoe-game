@@ -14,7 +14,10 @@ export default function calculateWinner(cells) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
-      return cells[a];
+      return {
+        winner: cells[a],
+        line: [a, b, c],
+      };
     }
   }
   return null;
